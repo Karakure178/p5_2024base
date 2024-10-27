@@ -1,4 +1,6 @@
 import gsap from "gsap";
+import fs from "./shader/normal.frag";
+import vs from "./shader/normal.vert";
 
 /**
  * shader&base テンプレ
@@ -7,6 +9,7 @@ import gsap from "gsap";
 export const sketch = (p) => {
   let canvas;
   let pg;
+  let theShader1;
 
   p.setup = () => {
     const init = () => {
@@ -26,6 +29,8 @@ export const sketch = (p) => {
 
     pg = p.createGraphics(p.width, p.height);
     image_init(pg, p);
+
+    theShader1 = p.createShader(vs, fs);
   };
 
   p.draw = () => {
@@ -37,6 +42,14 @@ export const sketch = (p) => {
     pg.translate(pg.width / 2, pg.height / 2);
     pg.rect(0, 0, rect_s, rect_s);
     pg.pop();
+
+    const shaderImage = () => {
+      p.shader(theShader1);
+      theShader1.setUniform(`u_tex`, pg);
+      theShader1.setUniform("u_resolution", [pg.width, pg.height]);
+      theShader1.setUniform(`u_time`, -p.frameCount / 35);
+    };
+    shaderImage();
 
     p.image(pg, 0, 0);
     p.pop();

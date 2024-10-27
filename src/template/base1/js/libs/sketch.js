@@ -24,7 +24,6 @@ export const sketch = (p) => {
     };
     init();
 
-    w = p.width;
     pg = p.createGraphics(p.width, p.height);
     image_init(pg, p);
   };

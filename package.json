@@ -3,18 +3,20 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "vite",
+    "build": "vite build"
   },
   "author": "karakure178",
   "license": "ISC",
   "description": "",
   "dependencies": {
     "canvas-capture": "^2.1.1",
-    "gsap": "^3.12.4",
-    "p5": "^1.9.0",
+    "gsap": "^3.12.5",
+    "p5": "^1.11.0",
     "p5.brush": "^1.1.2"
   },
   "devDependencies": {
+    "@eslint/js": "^9.13.0",
     "destyle.css": "^4.0.0",
     "eslint": "^9.13.0",
     "eslint-config-prettier": "^9.1.0",

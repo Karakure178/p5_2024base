@@ -20,7 +20,8 @@ export const sketch = (p) => {
       p.imageMode(p.CENTER);
       p.textureMode(p.NORMAL);
       p.frameRate(24);
-      p.noStroke();
+      
+        p.noStroke();
     };
     init();
 

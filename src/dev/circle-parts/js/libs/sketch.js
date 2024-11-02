@@ -12,7 +12,15 @@ export const sketch = (p) => {
   let sb;
 
   p.setup = () => {
-    init(canvas, p);
+    const canvasid = document.getElementById("mycanvas");
+    canvas = p.createCanvas(
+      canvasid.clientWidth,
+      canvasid.clientHeight,
+      p.WEBGL
+    );
+    canvas.parent(canvasid);
+
+    init(p);
     sb = new Scribble(p);
   };
 
@@ -40,11 +48,7 @@ export const sketch = (p) => {
   };
 };
 
-const init = (canvas, p) => {
-  const canvasid = document.getElementById("mycanvas");
-  canvas = p.createCanvas(canvasid.clientWidth, canvasid.clientHeight, p.WEBGL);
-  canvas.parent(canvasid);
-  p.imageMode(p.CENTER);
+const init = (p) => {
   p.textureMode(p.NORMAL);
   p.frameRate(24);
   p.noStroke();

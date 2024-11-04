@@ -5,7 +5,6 @@
 export const sketch = (p) => {
   let canvas;
   let pg;
-  const colors = ["#FF885B", "#557C56", "#33372C"];
 
   p.setup = () => {
     const init = () => {
@@ -19,7 +18,6 @@ export const sketch = (p) => {
       p.imageMode(p.CENTER);
       p.textureMode(p.NORMAL);
       p.frameRate(24);
-
       p.noStroke();
     };
     init();
@@ -29,10 +27,15 @@ export const sketch = (p) => {
   };
 
   p.draw = () => {
-    pg.background("#FAF7F0");
-
+    p.background(110);
     p.push();
-    grid(p, 5, pg, colors);
+
+    // ここに描く
+    const colors_1 = ["#000B58", "#FFF4B7"];
+    pg.push();
+    grid(p, 10, pg, colors_1);
+    pg.pop();
+
     p.image(pg, 0, 0);
     p.pop();
     p.noLoop();
@@ -58,6 +61,61 @@ const image_init = (pg, p) => {
   pg.noStroke();
 };
 
+const base = (p, pg, r, colors) => {
+  // r(100)を基準に
+  const r1 = r * 1.8;
+  const r2 = r * 1;
+  const r3 = r * 0.9;
+  const r4 = r * 0.3;
+  pg.fill(colors[0]);
+  pg.circle(0, 0, r1);
+
+  pg.fill(colors[1]);
+  pg.circle(0, 0, r2);
+
+  pg.fill(colors[0]);
+  pg.circle(0, 0, r3);
+
+  pg.fill(colors[1]);
+  pg.circle(0, 0, r4);
+};
+
+const base2 = (p, pg, r, colors) => {
+  const r1 = r * 2;
+  const r2 = r * 1.8;
+  const r3 = r * 1;
+  const r4 = r * 0.5;
+  pg.fill(colors[0]);
+  pg.circle(0, 0, r1);
+
+  pg.fill(colors[1]);
+  pg.circle(0, 0, r2);
+
+  pg.fill(colors[0]);
+  pg.circle(0, 0, r3);
+
+  pg.fill(colors[1]);
+  pg.circle(0, 0, r4);
+};
+
+const base3 = (p, pg, r, colors) => {
+  const r1 = r * 2;
+  const r2 = r * 1.8;
+  const r3 = r * 1.5;
+  const r4 = r * 1.2;
+  pg.fill(colors[0]);
+  pg.circle(0, 0, r1);
+
+  pg.fill(colors[1]);
+  pg.circle(0, 0, r2);
+
+  pg.fill(colors[0]);
+  pg.circle(0, 0, r3);
+
+  pg.fill(colors[1]);
+  pg.circle(0, 0, r4);
+};
+
 const grid = (p, num, pg, colors) => {
   const n1 = num + 1;
 
@@ -69,45 +127,21 @@ const grid = (p, num, pg, colors) => {
 
   for (let i = 0; i < num; i++) {
     for (let j = 0; j < num; j++) {
+      pg.push();
       const x = nw * i + margin_left * (i + 1);
       const y = nh * j + margin_bottom * (j + 1);
-      pg.push();
-      pg.fill(p.random(colors));
-      pg.stroke(p.random(colors));
+
+      const rand = Math.floor(p.random(1, 4));
       pg.translate(x + nw / 2, y + nw / 2);
-      base(p, pg, 60, 30);
-      // pg.circle(0, 0, nw / 2);
+      if (rand === 1) {
+        base(p, pg, nw * 0.8, colors);
+      } else if (rand === 2) {
+        base2(p, pg, nw * 0.8, colors);
+      } else {
+        base3(p, pg, nw * 0.8, colors);
+      }
+      // pg.circle(x + nw / 2, y + nw / 2, nw);
       pg.pop();
     }
   }
-};
-
-const base = (p, pg, num, r) => {
-  pg.push();
-  const angle = 360 / num;
-  pg.stroke(255);
-  pg.circle(0, 0, 100);
-  for (let i = 0; i < num; i++) {
-    let x = r * p.cos(p.radians(angle * i));
-    let y = r * p.sin(p.radians(angle * i));
-    pg.strokeWeight(3);
-    pg.point(x, y);
-
-    x = (r + r * 0.3) * p.cos(p.radians(angle * i));
-    y = (r + r * 0.3) * p.sin(p.radians(angle * i));
-    let xx = (r + r * 0.5) * p.cos(p.radians(angle * i));
-    let yy = (r + r * 0.5) * p.sin(p.radians(angle * i));
-    pg.line(x, y, xx, yy);
-  }
-
-  const rand = p.random(0, num);
-  const rand2 = p.random(0, num);
-  let x = r * p.cos(p.radians(angle * rand));
-  let y = r * p.sin(p.radians(angle * rand));
-  pg.circle(x, y, r * 0.4);
-
-  x = (r + r * 0.4) * p.cos(p.radians(angle * rand2));
-  y = (r + r * 0.4) * p.sin(p.radians(angle * rand2));
-  pg.circle(x, y, r * 0.7);
-  pg.pop();
 };

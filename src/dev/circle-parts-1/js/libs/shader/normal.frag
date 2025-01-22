@@ -21,7 +21,9 @@ void main(){
     float interval = 3.0;
     float strength = smoothstep(interval * 0.5, interval, interval - mod(u_time, interval));
     float whiteNoise = (random(uv + mod(u_time, 10.0)) * 2.0 - 1.0) * (0.15 + strength * 0.15);
-
+    
+    // 参考
+    //https://qiita.com/edo_m18/items/d166653ac0dccbc607dc
     uv = floor(uv * 200.0) / 200.0;
     vec4 tex = texture2D(u_tex, uv);
     gl_FragColor = tex + whiteNoise;

@@ -47,7 +47,7 @@ export const sketch = (p) => {
   p.keyPressed = () => {
     if (p.key === "s") {
       p.saveCanvas(canvas, "image", "png");
-      p.saveGif("image", 4);
+      // p.saveGif("image", 4);
     }
   };
 };
@@ -62,6 +62,7 @@ const image_init = (pg, p) => {
   pg.background(110);
   pg.fill(255);
   pg.noStroke();
+  pg.strokeWeight(0.4);
 };
 
 const enbase = (p, pg) => {

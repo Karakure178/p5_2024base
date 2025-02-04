@@ -27,9 +27,10 @@ export const sketch = (p) => {
 
     p.push();
     p.background(220);
-    // grid(p, Math.floor(p.random(3, 10)), colors, -p.width / 2, -p.height / 2);
+    brush.load(); // これ必須
     brush.noStroke();
-    grid(p, 2, colors, -p.width / 2, -p.height / 2);
+    grid(p, Math.floor(p.random(3, 10)), colors, -p.width / 2, -p.height / 2);
+    //grid(p, 2, colors, -p.width / 2, -p.height / 2);
 
     // brush.noStroke();
     // brush.fill("#E84545", p.random(30, 140));
@@ -54,7 +55,6 @@ export const sketch = (p) => {
 
     const nw = p.width / n1;
     const nh = p.height / n1;
-    brush.fill(p.random(colors), p.random(30, 140));
 
     for (let i = 0; i < num; i++) {
       for (let j = 0; j < num; j++) {
@@ -62,6 +62,9 @@ export const sketch = (p) => {
         const y = nh * j + margin_bottom * (j + 1);
         const randX = p.random(x + 10, x + nw - 10);
         const randY = p.random(y + 10, y + nw - 10);
+        const c = p.random(colors);
+        brush.fill(c, p.random(30, 140));
+        brush.set("marker2", c, 1);
         brush.rect(x + w, y + h, -x + randX, -y + randY);
         brush.rect(randX + w, randY + h, nw + x - randX, nw + y - randY);
       }

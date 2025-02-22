@@ -10,7 +10,7 @@ export const sketch = (p) => {
   let canvas;
   let pg;
   let theShader1;
-  let colors = ["#5CB338", "#ECE852", "#FFC145", "#FB4141"];
+  let colors = ["#FF8383", "#FFF574", "#A1D6CB", "#A19AD3"];
 
   p.setup = () => {
     const init = () => {
@@ -46,7 +46,8 @@ export const sketch = (p) => {
     };
 
     grid(p, Math.floor(p.random(2, 10)), pg, colors);
-    //shaderImage();
+    //grid(p, 10, pg, colors);
+    shaderImage();
 
     p.image(pg, 0, 0);
     p.pop();
@@ -80,7 +81,7 @@ const base = (p, pg, r, size, colors, a, w, h) => {
   pg.stroke(p.random(colors));
   pg.translate(w, h);
   for (let i = 0; i < 360; i++) {
-    const x = a * Math.pow(p.cos(p.radians(i)), 3);
+    const x = a * Math.pow(p.cos(p.radians(i)), 1);
     const y = a * Math.pow(p.sin(p.radians(i)), 3);
 
     pg.circle(x * r, y * r, size);

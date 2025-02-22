@@ -45,7 +45,8 @@ export const sketch = (p) => {
       theShader1.setUniform(`u_time`, -p.frameCount / 35);
     };
 
-    grid(p, Math.floor(p.random(2, 10)), pg, colors);
+    // grid(p, Math.floor(p.random(2, 10)), pg, colors);
+    grid(p, 50, pg, colors);
     //shaderImage();
 
     p.image(pg, 0, 0);
@@ -80,8 +81,8 @@ const base = (p, pg, r, size, colors, a, w, h) => {
   pg.stroke(p.random(colors));
   pg.translate(w, h);
   for (let i = 0; i < 360; i++) {
-    const x = a * Math.pow(p.cos(p.radians(i)), 3);
-    const y = a * Math.pow(p.sin(p.radians(i)), 3);
+    const x = a * Math.pow(p.cos(p.radians(i)), 4);
+    const y = a * Math.pow(p.sin(p.radians(i)), 2);
 
     pg.circle(x * r, y * r, size);
   }

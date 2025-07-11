@@ -84,7 +84,7 @@ void main(){
   float celler=voronoiColor.z;
   
   // fractでリピートできる
-  vec4 tex=texture2D(u_tex,fract((uv+(celler*0.01))));
+  vec4 tex=texture2D(u_tex,fract((uv+(celler*0.0))));
   
     // white noise用
     float interval = 3.0;
